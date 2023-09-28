@@ -19,8 +19,8 @@ public class ModelClass {
         boolean successfulParsing = false;
         for (String string : dataArray) {
             try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                Date date = dateFormat.parse(string);
+                SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                Date date = inputDateFormat.parse(string);
                 this.dob = date;
                 successfulParsing = true;
             } catch (ParseException e) {
