@@ -2,6 +2,7 @@ package Model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ModelClass {
@@ -20,8 +21,7 @@ public class ModelClass {
         for (String string : dataArray) {
             try {
                 SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                Date date = inputDateFormat.parse(string);
-                this.dob = date;
+                this.dob = inputDateFormat.parse(string);
                 successfulParsing = true;
             } catch (ParseException e) {
 
@@ -49,12 +49,38 @@ public class ModelClass {
             } else if (this.patronymic == null || this.patronymic.isEmpty()) {
                 this.patronymic = string;
             }
-            }
-        
+        }
+
         return this;
     }
 
-    public String getSurname() {
+    public String[] newSortedArray(String[] oldArray) {
+        boolean flag = false;
+        String regex = "\\d+";
+        String[] newSorted = new String[6];
+        try {
+            for (String str : oldArray) {
+                if (str.length() == 10 || str.contains(".")) {
+                    newSorted[3] = str;
+                } else if (str.matches(regex)) {
+                    newSorted[4] = str;
+                } else if (str.length() == 1) {
+                    newSorted[5] = str;
+                } else if (newSorted[0] == null || newSorted[0].isEmpty()) {
+                    newSorted[0] = str;
+                } else if (newSorted[1] == null || newSorted[1].isEmpty()) {
+                    newSorted[1] = str;
+                } else if (newSorted[2] == null || newSorted[2].isEmpty()) {
+                    newSorted[2] = str;
+                }
+            }
+        } finally {
+
+        }
+        return newSorted;
+    }
+
+      public String getSurname() {
         return surname;
     }
 
